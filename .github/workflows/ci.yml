@@ -1,0 +1,69 @@
+# =============================================================================
+# Bonde Web - CI
+# -----------------------------------------------------------------------------
+# Quality gate: lint + production build (both site modes). Every job is
+# required; the `check` gate summarises them so branch protection can require a
+# single status. Deployments happen through the host's GitHub integration (same
+# as the admin app), so this pipeline is CI-only.
+#
+# The project uses npm (package-lock.json) and Node 22 (matches Bonde-Backend
+# and Bonde-Admin). `next build` performs the TypeScript type-check + prerender
+# and needs no secrets: next.config.ts's /api rewrite falls back to the default
+# API_URL when unset. `NEXT_PUBLIC_SITE_MODE` is inlined at build time, so both
+# `waitlist` (default) and `landing` are built explicitly to catch
+# mode-specific regressions.
+# =============================================================================
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+
+  build:
+    name: Build (${{ matrix.site_mode }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        site_mode: [waitlist, landing]
+    env:
+      NEXT_PUBLIC_SITE_MODE: ${{ matrix.site_mode }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+  check:
+    name: All checks passed
+    runs-on: ubuntu-latest
+    needs: [lint, build]
+    steps:
+      - run: echo "All CI jobs passed."

@@ -1,0 +1,134 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Brand tokens. The primary is Bonde orange; the palette is shared with
+ * Bonde-Admin so the marketing site and console stay visually consistent.
+ * The site is dark-first — `defaultTheme="dark"` on ThemeProvider — and users
+ * can switch to light/system from the header.
+ */
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.62 0.15 36.57);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.967 0.001 286.375);
+  --muted-foreground: oklch(0.552 0.016 285.938);
+  --accent: oklch(0.967 0.001 286.375);
+  --accent-foreground: oklch(0.21 0.006 285.885);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.92 0.004 286.32);
+  --input: oklch(0.92 0.004 286.32);
+  --ring: oklch(0.72 0.11 36.57);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.21 0.006 285.885);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.21 0.006 285.885);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.68 0.14 36.57);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.269 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0.006 286.033);
+  --muted-foreground: oklch(0.708 0.016 286.067);
+  --accent: oklch(0.269 0.006 286.033);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.72 0.11 36.57);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/*
+ * Waitlist-only palette. The pre-launch page is intentionally dark regardless
+ * of the theme toggle (which is hidden there), so these are fixed tokens rather
+ * than light/dark pairs. They are page-scoped so nothing else is affected.
+ */
+@theme {
+  --color-waitlist-bg: #0a0807;
+  --color-waitlist-surface: #140d0b;
+  --color-waitlist-surface-2: #1c120f;
+  --color-waitlist-border: #261913;
+  --color-waitlist-border-strong: #3b231a;
+  --color-waitlist-accent: #ff5722;
+  --color-waitlist-accent-hover: #f4511e;
+  --color-waitlist-muted: #9ca3af;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  ::selection {
+    @apply bg-primary/10 text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Warm radial glow behind hero sections — the visual signature of the site. */
+  .bg-brand-glow {
+    background-image: radial-gradient(
+      60% 60% at 50% 0%,
+      color-mix(in oklab, var(--primary) 22%, transparent) 0%,
+      transparent 70%
+    );
+  }
+  /* Faint grid that fades towards the edges, used behind the waitlist hero. */
+  .bg-brand-grid {
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+    mask-image: radial-gradient(70% 60% at 50% 0%, black, transparent 75%);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
