@@ -17,7 +17,7 @@ export const siteConfig = {
   logoWhite: "/bonde-white-logo.png",
   icon: "/bonde-icon.png",
   /** Backdrop for the pre-launch waitlist page. */
-  waitlistBackground: "/waitlist-backgroun.png",
+  waitlistBackground: "/waitlist-background.png",
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "usebonde@gmail.com",
   links: {
     admin: process.env.NEXT_PUBLIC_ADMIN_URL ?? "http://localhost:3000",
