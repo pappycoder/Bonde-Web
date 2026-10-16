@@ -15,7 +15,7 @@ export const siteConfig = {
   logo: "/bonde-logo.png",
   /** White wordmark for dark surfaces (the waitlist hero). */
   logoWhite: "/bonde-white-logo.png",
-  icon: "/bonde-icon.png",
+  icon: "/bonde-logo.png",
   /** Backdrop for the pre-launch waitlist page. */
   waitlistBackground: "/waitlist-background.png",
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "usebonde@gmail.com",
