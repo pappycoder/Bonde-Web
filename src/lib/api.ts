@@ -27,7 +27,9 @@ export interface ContactMessageResult {
 
 export interface WaitlistPayload {
   email: string;
-  name?: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
   source?: string;
 }
 

@@ -23,9 +23,15 @@ export const siteConfig = {
     admin: process.env.NEXT_PUBLIC_ADMIN_URL ?? "http://localhost:3000",
     appStore: process.env.NEXT_PUBLIC_APP_STORE_URL ?? "",
     playStore: process.env.NEXT_PUBLIC_PLAY_STORE_URL ?? "",
-    twitter: process.env.NEXT_PUBLIC_TWITTER_URL ?? "https://x.com/usebonde",
-    instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "",
-    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "",
+    twitter:
+      process.env.NEXT_PUBLIC_TWITTER_URL?.trim() ||
+      "https://x.com/usebonde?s=11",
+    instagram:
+      process.env.NEXT_PUBLIC_INSTAGRAM_URL?.trim() ||
+      "https://www.instagram.com/use_bonde?vrfl=dWs3cnZyOTM2M3hz&utm_source=qr",
+    linkedin:
+      process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() ||
+      "https://www.linkedin.com/company/usebonde/",
   },
 } as const;
 

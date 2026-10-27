@@ -18,3 +18,12 @@ export function required(value: string): boolean {
 export function maxLength(value: string, limit: number): boolean {
   return value.length <= limit;
 }
+
+/** Preserve local leading zeroes and optional international country codes. */
+export function normalizePhone(value: string): string {
+  return value.replace(/[\s()-]/g, "");
+}
+
+export function isValidPhone(value: string): boolean {
+  return /^\+?[0-9]{7,15}$/.test(normalizePhone(value));
+}

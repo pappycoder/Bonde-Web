@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy" updated="14 October 2026">
+    <LegalPage title="Privacy Policy" updated="27 October 2026">
       <p>
         This policy explains what information {siteConfig.name} (&ldquo;we&rdquo;, &ldquo;us&rdquo;)
         collects, why we collect it, and the choices you have. It covers this website, our
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
       <ul>
         <li>
           <strong>Information you give us.</strong> When you join the waitlist or contact us, we
-          collect the details you provide — such as your name, email address, message and, when
+          collect the details you provide — such as your first and last name, email address, phone number, message and, when
           you create an account, the information needed to verify your identity.
         </li>
         <li>

@@ -54,7 +54,7 @@ deployed environment requires a rebuild.
 - The only integration is the waitlist + contact forms. Both POST same-origin to
   `/api/waitlist` and `/api/contact`; `next.config.ts` rewrites `/api/*` to
   `API_URL` (default `http://localhost:3001`), so no CORS allowance is needed.
-- Backend contract: `POST /api/waitlist` `{ email, name?, source? }` and
+- Backend contract: `POST /api/waitlist` `{ email, firstName, lastName, phone, source? }` and
   `POST /api/contact` `{ name, email, subject?, message }`, both `201`. Errors
   are the uniform `{ statusCode, message }` shape (`message` is a string or an
   array of strings) — see `src/lib/api.ts`.
