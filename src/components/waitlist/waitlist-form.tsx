@@ -184,11 +184,7 @@ export function WaitlistForm({ source = "waitlist-page" }: WaitlistFormProps) {
                 type={field.type}
                 autoComplete={field.autoComplete}
                 maxLength={field.maxLength}
-                placeholder={
-                  field.name === "phone"
-                    ? "08012345678 or +2348012345678"
-                    : field.label
-                }
+                placeholder={field.label}
                 value={fields[field.name]}
                 onChange={(event) =>
                   setFields({ ...fields, [field.name]: event.target.value })
