@@ -35,9 +35,11 @@ export const metadata: Metadata = {
     title: `${siteConfig.fullName} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     url: siteConfig.url,
+    images: [{ url: siteConfig.icon, width: 512, height: 512, alt: "Bonde" }],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
+    images: [siteConfig.icon],
     title: `${siteConfig.fullName} — ${siteConfig.tagline}`,
     description: siteConfig.description,
   },
