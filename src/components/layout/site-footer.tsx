@@ -2,13 +2,13 @@ import { Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { legalItems, navItems } from "@/config/nav";
+import { legalItems } from "@/config/nav";
 import { siteConfig } from "@/config/site";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/60 bg-muted/30">
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.5fr_1fr_1fr] lg:px-8">
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.5fr_1fr] lg:px-8">
         <div className="space-y-4">
           <Image
             src={siteConfig.logo}
@@ -21,22 +21,6 @@ export function SiteFooter() {
             {siteConfig.description}
           </p>
         </div>
-
-        <nav aria-label="Company">
-          <h2 className="text-sm font-semibold">Company</h2>
-          <ul className="mt-4 space-y-2">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
 
         <nav aria-label="Legal">
           <h2 className="text-sm font-semibold">Legal</h2>
