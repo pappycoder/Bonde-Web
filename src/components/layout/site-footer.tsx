@@ -2,15 +2,8 @@ import { Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { InstagramIcon, LinkedInIcon, XIcon } from "@/components/marketing/social-icons";
 import { legalItems, navItems } from "@/config/nav";
 import { siteConfig } from "@/config/site";
-
-const socials = [
-  { title: "X (Twitter)", href: siteConfig.links.twitter, icon: XIcon },
-  { title: "Instagram", href: siteConfig.links.instagram, icon: InstagramIcon },
-  { title: "LinkedIn", href: siteConfig.links.linkedin, icon: LinkedInIcon },
-].filter((social) => social.href);
 
 export function SiteFooter() {
   return (
@@ -27,20 +20,6 @@ export function SiteFooter() {
           <p className="max-w-xs text-sm text-muted-foreground text-pretty">
             {siteConfig.description}
           </p>
-          <div className="flex items-center gap-3">
-            {socials.map((social) => (
-              <a
-                key={social.title}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label={social.title}
-                className="text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <social.icon className="size-4" />
-              </a>
-            ))}
-          </div>
         </div>
 
         <nav aria-label="Company">

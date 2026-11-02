@@ -19,7 +19,7 @@ export function SiteHeader() {
 
   const waitlist = isWaitlistMode();
   const cta = waitlist
-    ? { label: "Join the waitlist", href: "/#waitlist" }
+    ? { label: "Join the waitlist", href: "/" }
     : { label: "Get started", href: "/contact" };
 
   return (

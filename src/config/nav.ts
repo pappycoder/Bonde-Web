@@ -5,9 +5,6 @@ export type NavItem = {
 
 /** Primary marketing navigation, shared by the header and footer. */
 export const navItems: NavItem[] = [
-  { title: "Features", href: "/features" },
-  { title: "How it works", href: "/how-it-works" },
-  { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
 ];
 
