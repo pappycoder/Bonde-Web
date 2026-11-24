@@ -12,6 +12,16 @@ set -uo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Environment tools work without starting the app or installing its runtime.
+case "${1:-}" in
+  env:init|env:pull|env:push|env:plan|env:validate|env:export|env:github)
+    command_name="${1#env:}"; shift
+    cd "$PROJECT_DIR" || exit 1
+    exec node scripts/env-vercel.mjs "$command_name" "$@"
+    ;;
+esac
+
+
 RESET=$'\033[0m'
 BOLD=$'\033[1m'
 GREEN=$'\033[32m'
@@ -104,6 +114,7 @@ main() {
     printf '  %b  Build (waitlist mode)     %b\n' "$BOLD[3]$RESET" "$DIM npm run build$RESET"
     printf '  %b  Build (landing mode)      %b\n' "$BOLD[4]$RESET" "$DIM NEXT_PUBLIC_SITE_MODE=landing npm run build$RESET"
     printf '  %b  Lint                      %b\n' "$BOLD[5]$RESET" "$DIM npm run lint$RESET"
+    printf '  %b  Environment sync commands: ./bonde.sh env:pull / env:push / env:plan\n' "$BOLD[e]$RESET"
     printf '  %b  Quit\n\n' "$BOLD[q]$RESET"
     printf '%b> %b' "$GREEN" "$RESET"
     read -r choice
@@ -113,6 +124,7 @@ main() {
       3) build_waitlist ;;
       4) build_landing ;;
       5) run_lint ;;
+      e|E) printf 'Use ./bonde.sh env:pull --environment preview or env:push --environment preview\n' ;;
       q|Q) ok "Bye!"; exit 0 ;;
       *) warn "Invalid choice: $choice" ;;
     esac
